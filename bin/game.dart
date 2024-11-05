@@ -45,10 +45,27 @@ class Game{
   // 전투 진행
   void battle(Monster monster){
     print('새로운 몬스터가 나타났습니다!');
-    print(monster.hp);
+    monster.showStatus();
     while(character.hp!>0&&monster.hp!>0){
-
+      print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어): ');
+      switch(int.parse(stdin.readLineSync().toString())){
+        case 1:
+          character.attackMonster(monster);
+        case 2:
+          character.defend();
+        default:
+          print('잘못된 입력입니다.');
+      }
+      character.showStatus();
+      monster.showStatus();
     }
+    if(character.hp!<=0){
+      print('${character.name}이(가) 쓰러졌습니다!');
+    }
+    if(monster.hp!<=0){
+      print('${monster.name}을(를) 물리쳤습니다!');
+    }
+    print('\n');
   }
   // 몬스터 리스트에서 대결할 몬스터 랜덤 반환
   Monster getRandomMonster(){
