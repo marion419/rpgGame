@@ -20,6 +20,7 @@ class Character {
   // 공격
   void attackMonster(Monster monster){
     monster.hp-=atk;
+    print('$name이(가) ${monster.name}에게 $atk의 데미지를 입혔습니다.\n');
   }
   // 방어
   void defend(){

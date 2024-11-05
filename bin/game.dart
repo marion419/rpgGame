@@ -37,21 +37,52 @@ class Game{
   // 게임 시작
   void startGame(){
     print('게임을 시작합니다!');
-    while(character.hp>=0){
+    bool keepGame=true;
+    while(keepGame){
       battle();
       if(monsterList.isEmpty){
         print('축하합니다! 모든 몬스터를 물리쳤습니다.');
-        break;
+        keepGame=false;
       }
       else{
         print('다음 몬스터와 싸우시겠습니까? [y/n]');
         switch(stdin.readLineSync()){
           case 'n':
+            keepGame=false;
             break;
         }
       }
     }
-    print('결과를 저장하시겠습니까? [y/n]');
+    // 승패 결과 산출
+    String fightResult='승리';
+    if(character.hp==0&&monsterList.isNotEmpty){
+      fightResult='패배';
+    }
+    else if(character.hp==0&&monsterList.isEmpty){
+      fightResult='무승부';
+    }
+
+    bool resultSave=true;
+    while(resultSave){
+      print('결과를 저장하시겠습니까? [y/n]');
+      String cmd;
+      try{
+        cmd=stdin.readLineSync().toString();}
+        catch(e){
+          print('입력이 잘못되었습니다.');
+          continue;
+        }
+      switch(cmd){
+        case 'y':
+        var resultFile = File('assets/txt/result.txt');
+          String contents='이름: ${character.name}, 남은 체력: ${character.hp}, 결과: $fightResult/n';
+          resultFile.writeAsStringSync(contents);
+          print('결과를 저장하였습니다.');
+        case 'n':
+          print('결과를 저장하지 않습니다.');
+          resultSave=false;
+      }
+    }
   }
 
   void printTest(){
@@ -87,6 +118,8 @@ class Game{
             print('잘못된 입력입니다.');
         }
       }
+      print('${monster.name}의 턴\n');
+      monster.attackCharacter(character);
       character.showStatus();
       monster.showStatus();
     }
@@ -102,7 +135,7 @@ class Game{
   Monster getRandomMonster(){
     int monsterNum=Random().nextInt(monsterList.length);
     Monster monsterPicked=monsterList[monsterNum];
-    monsterList.remove(monsterNum);
+    monsterList.removeAt(monsterNum);
     return monsterPicked;
   }
   

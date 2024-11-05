@@ -17,3 +17,4 @@ dev_dependencies:
 assets:
   -assets/txt/characters.txt
   -assets/txt/monsters.txt
+  -assets/txt/result.txt

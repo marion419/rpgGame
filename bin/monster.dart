@@ -13,7 +13,8 @@ class Monster {
   }
 
   void attackCharacter(Character character){
-    character.hp-=atk;
+    character.hp-=(atk-character.def);
+    print('$name이(가) ${character.name}에게 ${atk-character.def}의 데미지를 입혔습니다.\n');
   }
 
   void showStatus(){
