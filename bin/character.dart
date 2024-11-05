@@ -26,7 +26,6 @@ class Character {
   }
   // 상태 표시
   void showStatus(){
-
-
+    print('$name - 체력: $hp, 공격력: $atk, 방어력: $def\n');
   }
 }

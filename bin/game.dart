@@ -29,7 +29,7 @@ class Game{
     List<List<String>> monstertable=[];
     for(int i=1;i<monsterOnceSplited.length;i++){
       monstertable.add(monsterOnceSplited[i].split(','));
-      var temp=Monster(monstertable[i-1][0], int.parse(monstertable[i-1][1]), int.parse(monstertable[i-1][2]));
+      var temp=Monster(monstertable[i-1][0], int.parse(monstertable[i-1][1]), int.parse(monstertable[i-1][2]), character.def);
       monsterList.add(temp);
     }
   }
@@ -46,7 +46,7 @@ class Game{
   void battle(Monster monster){
     print('새로운 몬스터가 나타났습니다!');
     monster.showStatus();
-    while(character.hp!>0&&monster.hp!>0){
+    while(character.hp>0&&monster.hp>0){
       print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어): ');
       switch(int.parse(stdin.readLineSync().toString())){
         case 1:
@@ -59,10 +59,10 @@ class Game{
       character.showStatus();
       monster.showStatus();
     }
-    if(character.hp!<=0){
+    if(character.hp<=0){
       print('${character.name}이(가) 쓰러졌습니다!');
     }
-    if(monster.hp!<=0){
+    if(monster.hp<=0){
       print('${monster.name}을(를) 물리쳤습니다!');
     }
     print('\n');

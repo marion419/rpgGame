@@ -3,9 +3,9 @@ import 'character.dart';
 
 class Monster {
   String? name;
-  int? hp;
-  int? atk;
-  int? def;
+  int hp=0;
+  int atk=0;
+  int def=0;
 
   Monster(String this.name, int this.hp, int atk, int characterDef){
     this.atk=max(Random().nextInt(atk+1), characterDef);
@@ -17,6 +17,6 @@ class Monster {
   }
 
   void showStatus(){
-
+    print('$name - 체력: $hp, 공격력: $atk\n');
   }
 }
