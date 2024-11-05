@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'character.dart';
 
 class Monster {
@@ -6,11 +8,12 @@ class Monster {
   int? atk;
   int? def;
 
-  Monster(){
-    this.def=0;
+  Monster(String this.name, int this.hp, int atk){
+    this.atk=Random().nextInt(atk);
+    def=0;
   }
 
-  void attackCharacter(Character Character){
+  void attackCharacter(Character character){
 
   }
 

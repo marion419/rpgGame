@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this, prefer_initializing_formals
+
 import 'monster.dart';
 
 class Character {
@@ -5,6 +7,13 @@ class Character {
   int? hp;
   int? atk;
   int? def;
+
+  Character(String name, int hp, int atk, int def){
+    this.name=name;
+    this.hp=hp;
+    this.atk=atk;
+    this.def=def;
+  }
 
   // 공격
   void attackMonster(Monster monster){
