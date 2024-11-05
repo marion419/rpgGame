@@ -55,10 +55,10 @@ class Game{
     }
     // 승패 결과 산출
     String fightResult='승리';
-    if(character.hp==0&&monsterList.isNotEmpty){
+    if(character.hp<=0&&monsterList.isNotEmpty){
       fightResult='패배';
     }
-    else if(character.hp==0&&monsterList.isEmpty){
+    else if(character.hp<=0&&monsterList.isEmpty){
       fightResult='무승부';
     }
 
@@ -74,7 +74,7 @@ class Game{
         }
       switch(cmd){
         case 'y':
-        var resultFile = File('assets/txt/result.txt');
+          var resultFile = File('assets/txt/result.txt');
           String contents='이름: ${character.name}, 남은 체력: ${character.hp}, 결과: $fightResult/n';
           resultFile.writeAsStringSync(contents);
           print('결과를 저장하였습니다.');
