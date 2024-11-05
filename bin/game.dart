@@ -36,6 +36,22 @@ class Game{
 
   // 게임 시작
   void startGame(){
+    print('게임을 시작합니다!');
+    while(character.hp>=0){
+      battle();
+      if(monsterList.isEmpty){
+        print('축하합니다! 모든 몬스터를 물리쳤습니다.');
+        break;
+      }
+      else{
+        print('다음 몬스터와 싸우시겠습니까? [y/n]');
+        switch(stdin.readLineSync()){
+          case 'n':
+            break;
+        }
+      }
+    }
+    print('결과를 저장하시겠습니까? [y/n]');
   }
 
   void printTest(){
@@ -43,18 +59,33 @@ class Game{
   }
   
   // 전투 진행
-  void battle(Monster monster){
+  void battle(){
+    Monster monster=getRandomMonster();
     print('새로운 몬스터가 나타났습니다!');
     monster.showStatus();
     while(character.hp>0&&monster.hp>0){
       print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어): ');
-      switch(int.parse(stdin.readLineSync().toString())){
-        case 1:
-          character.attackMonster(monster);
-        case 2:
-          character.defend();
-        default:
-          print('잘못된 입력입니다.');
+      bool thisTurn=true;
+      while(thisTurn){
+        int command;
+        try{command=int.parse(stdin.readLineSync().toString());
+        }
+        catch(e){
+          print("입력값이 잘못되었습니다.");
+          continue;
+        }
+        switch(command){
+          case 1:
+            character.attackMonster(monster);
+            thisTurn=false;
+            break;
+          case 2:
+            character.defend();
+            thisTurn=false;
+            break;
+          default:
+            print('잘못된 입력입니다.');
+        }
       }
       character.showStatus();
       monster.showStatus();
