@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_this, prefer_initializing_formals
 
+import 'dart:math';
+
 import 'monster.dart';
 
 class Character {
@@ -17,11 +19,11 @@ class Character {
 
   // 공격
   void attackMonster(Monster monster){
-
+    monster.hp-=atk;
   }
   // 방어
-  void defend(){
-
+  void defend(int monsterAtk){
+    hp+=Random().nextInt(monsterAtk+1);
 
   }
   // 상태 표시

@@ -52,7 +52,7 @@ class Game{
         case 1:
           character.attackMonster(monster);
         case 2:
-          character.defend();
+          character.defend(monster.atk);
         default:
           print('잘못된 입력입니다.');
       }
