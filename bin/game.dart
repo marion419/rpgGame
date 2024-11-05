@@ -39,18 +39,23 @@ class Game{
   }
 
   void printTest(){
-    print(character!.name);
+    print(character.name);
   }
   
   // 전투 진행
-  void battle(){
-    
+  void battle(Monster monster){
+    print('새로운 몬스터가 나타났습니다!');
+    print(monster.hp);
+    while(character.hp!>0&&monster.hp!>0){
+
+    }
   }
   // 몬스터 리스트에서 대결할 몬스터 랜덤 반환
-  void getRandomMonster(){
+  Monster getRandomMonster(){
     int monsterNum=Random().nextInt(monsterList.length);
     Monster monsterPicked=monsterList[monsterNum];
     monsterList.remove(monsterNum);
+    return monsterPicked;
   }
   
 }
