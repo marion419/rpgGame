@@ -78,9 +78,12 @@ class Game{
           String contents='이름: ${character.name}, 남은 체력: ${character.hp}, 결과: $fightResult/n';
           resultFile.writeAsStringSync(contents);
           print('결과를 저장하였습니다.');
+          resultSave=false;
+          break;
         case 'n':
           print('결과를 저장하지 않습니다.');
           resultSave=false;
+          break;
       }
     }
   }
