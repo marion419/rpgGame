@@ -11,5 +11,5 @@ void main() {
   RegExp reg=RegExp(r'[a-zA-Z]');
   String name=stdin.readLineSync(/*RegExp(r'[^a-zA-Z]')*/).toString();
   var game=Game(name);
-  print(game.character!.name);
+  print(game.character.name);
 }
