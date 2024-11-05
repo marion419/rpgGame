@@ -9,7 +9,7 @@ class Monster {
   int? def;
 
   Monster(String this.name, int this.hp, int atk){
-    this.atk=Random().nextInt(atk);
+    this.atk=Random().nextInt(atk+1);
     def=0;
   }
 

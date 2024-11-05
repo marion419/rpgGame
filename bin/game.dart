@@ -5,7 +5,7 @@ import 'monster.dart';
 import 'dart:math';
 
 class Game{
-  Character? character;
+  Character character=Character('name', 0, 0, 0);
   List<Monster> monsterList=[];
   int? monsterCount;
 
@@ -44,9 +44,13 @@ class Game{
   
   // 전투 진행
   void battle(){
+    
   }
   // 몬스터 리스트에서 대결할 몬스터 랜덤 반환
   void getRandomMonster(){
+    int monsterNum=Random().nextInt(monsterList.length);
+    Monster monsterPicked=monsterList[monsterNum];
+    monsterList.remove(monsterNum);
   }
   
 }
