@@ -22,9 +22,8 @@ class Character {
     monster.hp-=atk;
   }
   // 방어
-  void defend(int monsterAtk){
-    hp+=Random().nextInt(monsterAtk+1);
-
+  void defend(){
+    hp+=Random().nextInt(def+1);
   }
   // 상태 표시
   void showStatus(){
