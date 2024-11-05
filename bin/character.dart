@@ -23,7 +23,7 @@ class Character {
   }
   // 방어
   void defend(){
-    hp+=Random().nextInt(def+1);
+    hp+=Random().nextInt(def-(def~/3)+1)+(def~/3);
   }
   // 상태 표시
   void showStatus(){
