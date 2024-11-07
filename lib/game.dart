@@ -7,7 +7,7 @@ import 'dart:math';
 class Game {
   Character character=Character('name', 0, 0, 0);
   List<Monster> monsterList=[];
-  int monsterCount=5;
+  int monsterCount=4;
   bool item=true;
   String name;
   int monsterDefUp=0;
@@ -77,6 +77,10 @@ class Game {
         print('축하합니다! 모든 몬스터를 물리쳤습니다.');
         keepGame=false;
       }
+      else if(character.hp<=0){
+        print('플레이어가 쓰러졌습니다.');
+        keepGame=false;
+      }
       else{
         print('다음 몬스터와 싸우시겠습니까? [y/n]');
         switch(stdin.readLineSync()){
@@ -94,6 +98,8 @@ class Game {
     else if(character.hp<=0&&monsterCount==0){
       fightResult='무승부';
     }
+
+    print('결과는 $fightResult입니다.');
 
     bool resultSave=true;
     while(resultSave){
@@ -130,6 +136,7 @@ class Game {
   
   // 전투 진행
   void battle(){
+    print('--------------------------------------------------------------');
     // 몬스터 뽑기
     Monster monster=getRandomMonster();
     print('새로운 몬스터가 나타났습니다!');
@@ -189,7 +196,7 @@ class Game {
       print('${monster.name}을(를) 물리쳤습니다!');
       monsterCount-=1;
     }
-    print('\n');
+    print('--------------------------------------------------------------');
   }
   // 몬스터 리스트에서 대결할 몬스터 랜덤 반환
   Monster getRandomMonster(){

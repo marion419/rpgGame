@@ -8,7 +8,7 @@ class Monster {
   int def=0;
 
   Monster(String this.name, this.hp, int atk, int characterDef){
-    this.atk=max(Random().nextInt(atk+1), characterDef);
+    this.atk=max(Random().nextInt(atk+1), characterDef+5);
     def=0;
   }
 
@@ -23,5 +23,6 @@ class Monster {
 
   void defUp(){
     def+=2;
+    print('$name의 방어력이 증가했습니다.');
   }
 }
