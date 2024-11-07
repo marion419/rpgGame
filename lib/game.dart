@@ -7,9 +7,10 @@ import 'dart:math';
 class Game {
   Character character=Character('name', 0, 0, 0);
   List<Monster> monsterList=[];
-  int monsterCount=2;
+  int monsterCount=5;
   bool item=true;
   String name;
+  int monsterDefUp=0;
 
   Game(this.name) {
     var characterFile = File('assets/txt/characters.txt');
@@ -69,6 +70,7 @@ class Game {
     character.showStatus();
 
     bool keepGame=true;
+
     while(keepGame){
       battle();
       if(monsterCount==0){
@@ -139,7 +141,7 @@ class Game {
       bool thisTurn=true;
       // 행동 선택
       print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어, 3: 아이템 사용) : ');
-      
+
       while(thisTurn){
         int command;
         try{command=int.parse(stdin.readLineSync().toString());
@@ -164,15 +166,25 @@ class Game {
             print('잘못된 입력입니다.');
         }
       }
+
       // 몬스터의 턴
       print('${monster.name}의 턴\n');
       monster.attackCharacter(character);
+      // 몬스터 방어력 증가 이벤트
+      if(monsterDefUp!=2){monsterDefUp++;}
+      else{monster.defUp(); monsterDefUp-=2;}
+
+      // 현재 상태 출력 후 이번 턴 종료
       character.showStatus();
       monster.showStatus();
     }
+
+    // 캐릭터가 쓰러진 경우
     if(character.hp<=0){
       print('${character.name}이(가) 쓰러졌습니다!');
     }
+
+    // 몬스터를 물리친 경우
     if(monster.hp<=0){
       print('${monster.name}을(를) 물리쳤습니다!');
       monsterCount-=1;

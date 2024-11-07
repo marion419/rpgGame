@@ -20,4 +20,8 @@ class Monster {
   void showStatus(){
     print('$name - 체력: $hp, 공격력: $atk\n');
   }
+
+  void defUp(){
+    def+=2;
+  }
 }
