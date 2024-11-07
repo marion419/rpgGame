@@ -19,7 +19,7 @@ class Monster {
       atkValue*=2;
     }
     character.hp-=(atkValue-character.def);
-    print('$name이(가) ${character.name}에게 ${atkValue-character.def}의 데미지를 입혔습니다.');
+    print('$name이(가) ${character.name}에게 ${atkValue-character.def}의 데미지를 입혔습니다.\n');
   }
 
   void showStatus(){
