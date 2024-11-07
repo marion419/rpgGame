@@ -13,8 +13,13 @@ class Monster {
   }
 
   void attackCharacter(Character character){
-    character.hp-=(atk-character.def);
-    print('$name이(가) ${character.name}에게 ${atk-character.def}의 데미지를 입혔습니다.');
+    int atkValue=Random().nextInt(5)+atk;
+    if(Random().nextInt(100)<15){
+      print('크리티컬!!!');
+      atkValue*=2;
+    }
+    character.hp-=(atkValue-character.def);
+    print('$name이(가) ${character.name}에게 ${atkValue-character.def}의 데미지를 입혔습니다.');
   }
 
   void showStatus(){
