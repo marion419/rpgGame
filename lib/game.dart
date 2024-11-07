@@ -83,11 +83,17 @@ class Game {
         keepGame=false;
       }
       else{
-        print('다음 몬스터와 싸우시겠습니까? [y/n]');
-        switch(stdin.readLineSync()){
-          case 'n':
-            keepGame=false;
-            break;
+        bool chooseNext=true;
+        while(chooseNext){
+          print('다음 몬스터와 싸우시겠습니까? [y/n]');
+          switch(stdin.readLineSync()){
+            case 'n':
+              keepGame=false;
+              chooseNext=false;
+              break;
+            default :
+              print('입력이 잘못되었습니다');
+          }
         }
       }
     }
