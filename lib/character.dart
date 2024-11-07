@@ -32,11 +32,16 @@ class Character {
   }
   // 아이템 사용
   void attackWithItem(Monster monster, bool item){
-    monster.hp-=atk*2;
+    monster.hp-=(Random().nextInt(5)+atk)*2;
     print('$name이(가) ${monster.name}에게 ${atk*2}의 데미지를 입혔습니다.');
   }
   // 상태 표시
   void showStatus(){
     print('$name - 체력: $hp, 공격력: $atk, 방어력: $def');
+  }
+  // 스킬
+  void dotSkill(Monster monster){
+    monster.hp-=4;
+    print('${monster.name}이(가) 4 만큼 도트 데미지를 입고 있습니다.');
   }
 }

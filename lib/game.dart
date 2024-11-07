@@ -6,11 +6,12 @@ import 'dart:math';
 
 class Game {
   Character character=Character('name', 0, 0, 0);
-  List<Monster> monsterList=[];
-  int monsterCount=4;
-  bool item=true;
-  String name;
-  int monsterDefUp=0;
+  List<Monster> monsterList=[]; // 몬스터 목록
+  int monsterCount=4;           // 처치해야 할 몬스터 수
+  bool item=true;               // 아이템이 존재할 시 true
+  String name;                  // 사용자로부터 입력받을 캐릭터 이름
+  int monsterDefUp=0;           // 몬스터의 방어력이 증가하는 3턴을 세는 변수
+  int dot=0;                    // 도트 데미지 턴 수를 세는 변수
 
   Game(this.name) {
     var characterFile = File('assets/txt/characters.txt');
@@ -133,7 +134,14 @@ class Game {
       print('보너스 체력을 얻었습니다! 현재 체력: ${character.hp}');
     }
   }
-  
+
+  void dotAtack(Monster monster){
+    if(dot>0){
+      character.dotSkill(monster);
+      dot--;
+    }
+  }
+
   // 전투 진행
   void battle(){
     print('--------------------------------------------------------------');
@@ -146,8 +154,9 @@ class Game {
     while(character.hp>0&&monster.hp>0){
       // 플레이어의 턴
       bool thisTurn=true;
+
       // 행동 선택
-      print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어, 3: 아이템 사용) : ');
+      print('|--------${character.name}의 턴 --------|\n\n행동을 선택하세요 (1: 공격, 2: 방어, 3: 아이템 사용, 4: 스킬 사용) : ');
 
       while(thisTurn){
         int command;
@@ -160,22 +169,28 @@ class Game {
         switch(command){
           case 1:
             character.attackMonster(monster);
+            dotAtack(monster);
             thisTurn=false;
             break;
           case 2:
             character.defend();
+            dotAtack(monster);
             thisTurn=false;
             break;
           case 3:
-            if(item) {character.attackWithItem(monster, item); item=false; thisTurn=false;}
+            if(item) {character.attackWithItem(monster, item); item=false; dotAtack(monster); thisTurn=false;}
             else {print('아이템이 없습니다.'); break;}
+          case 4:
+           dot=3;
+           dotAtack(monster);
+           thisTurn=false;
           default:
             print('잘못된 입력입니다.');
         }
       }
 
       // 몬스터의 턴
-      print('${monster.name}의 턴\n');
+      print('\n|--------${monster.name}의 턴--------|\n');
       monster.attackCharacter(character);
       // 몬스터 방어력 증가 이벤트
       if(monsterDefUp!=2){monsterDefUp++;}
