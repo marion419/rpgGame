@@ -87,12 +87,15 @@ class Game {
         while(chooseNext){
           print('다음 몬스터와 싸우시겠습니까? [y/n]');
           switch(stdin.readLineSync()){
+            case 'y':
+              monsterDefUp=0;
+              chooseNext=false;
             case 'n':
               keepGame=false;
               chooseNext=false;
               break;
             default :
-              print('입력이 잘못되었습니다');
+              print('입력값이 잘못되었습니다.');
           }
         }
       }
@@ -191,7 +194,7 @@ class Game {
            dotAtack(monster);
            thisTurn=false;
           default:
-            print('잘못된 입력입니다.');
+            print('입력값이 잘못되었습니다.');
         }
       }
 
