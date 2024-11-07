@@ -1,9 +1,9 @@
 // ignore_for_file: unused_import
 
-import 'package:rpg_game/rpg_game.dart' as rpg_game;
-import 'character.dart';
-import 'monster.dart';
-import 'game.dart';
+//import 'package:rpg_game/rpg_game.dart' as rpg_game;
+import 'package:rpg_game/character.dart' as rpg_game;
+import 'package:rpg_game/monster.dart';
+import 'package:rpg_game/game.dart';
 import 'dart:io';
 
 void main() {
