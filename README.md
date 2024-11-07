@@ -18,6 +18,8 @@
 입력 ``1``, ``2``, ``3``, ``4`` 에 따라 네 가지 전투 기능을 제공합니다.
 
 ![image](https://github.com/user-attachments/assets/25c471e2-8dd1-45ce-912e-5b63d5a9e24d)
+![image](https://github.com/user-attachments/assets/96f1e47b-d748-4f42-9966-1ff611b0ae74)
+
 
 ``1``  기본 공격입니다. 운이 좋으면 급소를 노립니다. 하지만 상대편도 노린다는 걸 잊지 마세요.
 
