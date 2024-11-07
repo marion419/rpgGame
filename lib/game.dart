@@ -4,15 +4,14 @@ import 'character.dart';
 import 'monster.dart';
 import 'dart:math';
 
-class Game{
+class Game {
   Character character=Character('name', 0, 0, 0);
   List<Monster> monsterList=[];
   int monsterCount=2;
+  bool item=true;
+  String name;
 
-  Game(String name){
-    monsterList=[];
-    monsterCount=2;
-    // File reading
+  Game(this.name) {
     var characterFile = File('assets/txt/characters.txt');
     var monsterFile = File('assets/txt/monsters.txt');
 
@@ -24,7 +23,7 @@ class Game{
     List<String> characterTable=characterOnceSplited[1].split(',');
     character=Character(name, int.parse(characterTable[0]), int.parse(characterTable[1]), int.parse(characterTable[2]));
 
-    // monsterList<Monster> 생성
+    //monsterList<Monster> 생성
     List<String> monsterOnceSplited=monsterContents.split('\n');
     List<List<String>> monstertable=[];
     for(int i=1;i<monsterOnceSplited.length;i++){
@@ -34,10 +33,41 @@ class Game{
     }
   }
 
+  // Future<String> readFile (String direction) async {
+  //   var loadFile;
+  //   await Future.delayed(Duration(), () {loadFile = File(direction);});
+  //   String contents='';
+  //   await Future.delayed(Duration(), () {contents = loadFile.readAsStringSync();});
+  //   return contents;
+  // }
+
+  // void setMonsterList() async {
+  //   readFile('assets/txt/monsters.txt').then(()){
+  //     print(value);
+  //   });
+  //   print('x');
+  //   List<String> monsterOnceSplited=readFile('assets/txt/monsters.txt').toString().split('\n');
+  //   //print('${monsterOnceSplited}');
+  //   List<List<String>> monstertable=[];
+  //   for(int i=1;i<monsterOnceSplited.length;i++){
+  //     monstertable.add(monsterOnceSplited[i].split(','));
+  //     var temp=Monster(monstertable[i-1][0], int.parse(monstertable[i-1][1]), int.parse(monstertable[i-1][2]), character.def);
+  //     monsterList.add(temp);
+  //   }
+  // }
+
+  // void setCharacterList() async {
+  //   List<String> characterOnceSplited=readFile('assets/txt/characters.txt').toString().split('\n');
+  //   List<String> characterTable=characterOnceSplited[1].split(',');
+  //   character=Character(name, int.parse(characterTable[0]), int.parse(characterTable[1]), int.parse(characterTable[2]));
+  // }
+
   // 게임 시작
   void startGame(){
     print('게임을 시작합니다!');
     getBonusHp();
+    character.showStatus();
+
     bool keepGame=true;
     while(keepGame){
       battle();
@@ -98,12 +128,18 @@ class Game{
   
   // 전투 진행
   void battle(){
+    // 몬스터 뽑기
     Monster monster=getRandomMonster();
     print('새로운 몬스터가 나타났습니다!');
     monster.showStatus();
+
+    // 전투 턴 반복
     while(character.hp>0&&monster.hp>0){
-      print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어): ');
+      // 플레이어의 턴
       bool thisTurn=true;
+      // 행동 선택
+      print('${character.name}의 턴\n행동을 선택하세요 (1: 공격, 2: 방어, 3: 아이템 사용) : ');
+      
       while(thisTurn){
         int command;
         try{command=int.parse(stdin.readLineSync().toString());
@@ -121,10 +157,14 @@ class Game{
             character.defend();
             thisTurn=false;
             break;
+          case 3:
+            if(item) {character.attackWithItem(monster, item); item=false; thisTurn=false;}
+            else {print('아이템이 없습니다.'); break;}
           default:
             print('잘못된 입력입니다.');
         }
       }
+      // 몬스터의 턴
       print('${monster.name}의 턴\n');
       monster.attackCharacter(character);
       character.showStatus();
